@@ -4,7 +4,7 @@ import onnxruntime
 import matplotlib.pyplot as plt
 
 # Load the image
-image_path = "C:/Users/haree/OneDrive/Pictures/Camera Roll/WIN_20230721_18_57_03_Pro.jpg"
+image_path = 'rgb.png'
 image = Image.open(image_path).convert("RGB")
 
 # Resize the image to match the model's input size
@@ -17,7 +17,8 @@ image_np = np.array(image) / 255.0
 input_data = np.expand_dims(image_np.transpose(2, 0, 1).astype(np.float32), axis=0)
 
 # Load the ONNX model
-model_path = "C:/Users/haree/Downloads/fast-depth (2).onnx"
+model_path = 'fast-depth.onnx'
+
 ort_session = onnxruntime.InferenceSession(model_path)
 
 input_tensor_name = "input.1"
