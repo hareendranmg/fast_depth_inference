@@ -1,10 +1,13 @@
+import os
 from PIL import Image
 import numpy as np
 import onnxruntime
 import matplotlib.pyplot as plt
+import image_display_module
 
-# Load the image
-image_path = 'rgb.png'
+
+# Path to the image file you want to display
+image_path = os.path.join(os.getcwd(),'rgb.png')
 image = Image.open(image_path).convert("RGB")
 
 # Resize the image to match the model's input size
@@ -38,8 +41,15 @@ plt.axis('off')
 
 plt.subplot(122)
 plt.imshow(depth_map, cmap='viridis')
-plt.colorbar()
+# plt.colorbar()
 plt.title('Depth Map')
 plt.axis('off')
 
-plt.show()
+# Save the plot as an image file
+plt.savefig("depth_map.png")
+plt.close()
+
+depth_map_image_path = os.path.join(os.getcwd(),'depth_map.png')
+
+# Display the image using GStreamer
+image_display_module.display_image(depth_map_image_path)
